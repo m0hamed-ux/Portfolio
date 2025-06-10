@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohamed El Khamlichi | Web Developer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+    }
+    header {
+      background: linear-gradient(90deg, #4f8cff 0%, #6ee7b7 100%);
+      color: #fff;
+      padding: 60px 0 40px 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    header p {
+      margin: 10px 0 0 0;
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+    nav {
+      margin-top: 30px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #222;
+    }
+    section {
+      max-width: 900px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(79,140,255,0.08);
+      padding: 40px 30px;
+    }
+    h2 {
+      color: #4f8cff;
+      margin-top: 0;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 20px 0 0 0;
+    }
+    .skill {
+      background: #e0e7ff;
+      color: #222;
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(79,140,255,0.07);
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .project-card {
+      background: #f5f7fa;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(79,140,255,0.06);
+      padding: 22px 18px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 6px 24px rgba(79,140,255,0.13);
+    }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #4f8cff;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      font-size: 1rem;
+      color: #444;
+    }
+    .project-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #4f8cff;
+      text-decoration: underline;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .contact-form input, .contact-form textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .contact-form button {
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover {
+      background: #2563eb;
+    }
+    footer {
+      text-align: center;
+      color: #888;
+      padding: 30px 0 20px 0;
+      font-size: 1rem;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      section { padding: 24px 8px; }
+      .projects { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mohamed El Khamlichi</h1>
+    <p>Web Developer | Frontend & Backend Enthusiast</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      Hi! I'm Mohamed, a passionate web developer with a love for building modern, responsive, and user-friendly web applications. I enjoy turning complex problems into simple, beautiful, and intuitive designs. Let's create something amazing together!
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-list">
+      <div class="skill">HTML5</div>
+      <div class="skill">CSS3</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">React</div>
+      <div class="skill">Node.js</div>
+      <div class="skill">Express</div>
+      <div class="skill">MongoDB</div>
+      <div class="skill">Git & GitHub</div>
+      <div class="skill">REST APIs</div>
+      <div class="skill">Responsive Design</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <div class="project-title">Portfolio Website</div>
+        <div class="project-desc">A personal portfolio website to showcase my work, skills, and contact information. Built with React and styled-components.</div>
+        <a class="project-link" href="#" target="_blank">View Project</a>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Task Manager App</div>
+        <div class="project-desc">A full-stack task management app with user authentication, real-time updates, and a clean UI. Built with Node.js, Express, and MongoDB.</div>
+        <a class="project-link" href="#" target="_blank">View Project</a>
+      </div>
+      <div class="project-card">
+        <div class="project-title">E-commerce Store</div>
+        <div class="project-desc">A modern e-commerce platform with product search, cart, and checkout features. Built with React, Redux, and Firebase.</div>
+        <a class="project-link" href="#" target="_blank">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form class="contact-form" action="mailto:your.email@example.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Mohamed El Khamlichi. All rights reserved.
+  </footer>
+</body>
+</html>
