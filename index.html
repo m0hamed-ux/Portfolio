@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         html {
             scroll-behavior: smooth;
@@ -23,6 +24,51 @@
             border-radius: 9999px;
         }
     </style>
+    <script type="module">
+        import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+        const supabaseUrl = 'https://iysjuxzznqwjmhpysyva.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5c2p1eHp6bnF3am1ocHlzeXZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxNDQ5NzAsImV4cCI6MjA2NDcyMDk3MH0.SYiUIJhxVo_X_SrN8RMapc5CebAZATB_OIbGjlnzFnk';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.querySelector('#contact form');
+            
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = this.querySelector('input[type="text"]').value;
+                const email = this.querySelector('input[type="email"]').value;
+                const message = this.querySelector('textarea').value;
+                
+                try {
+                    const { data, error } = await supabase
+                        .from('contact')
+                        .insert([
+                            { name, email, message }
+                        ]);
+                    
+                    if (error) throw error;
+                    
+                
+                    this.reset();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Message sent successfully!',
+                        confirmButtonColor: '#A0FF00'
+                    });
+                } catch (error) {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Failed to send message. Please try again.',
+                        confirmButtonColor: '#A0FF00'
+                    });
+                }
+            });
+        });
+    </script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -49,7 +95,7 @@
             <div class="flex justify-between items-center">
                 <a href="#" class="text-2xl font-bold text-primary flex items-center">
                     <img src="https://placehold.co/40x40/A0FF00/A0FF00" alt="Logo" class="mr-2 rounded-full">
-                    REACTIVE
+                    ELKHAMLICHI
                 </a>
                 <div class="hidden md:flex space-x-12 items-center">
                     <a href="#about" class="hover:text-primary transition text-lg">ABOUT ME</a>
@@ -209,7 +255,7 @@
         <div class="container mx-auto px-8 text-center">
             <h2 class="text-5xl font-bold mb-16 text-primary">LET'S HAVE A CHAT</h2>
             <div class="max-w-3xl mx-auto bg-card p-10 rounded-xl shadow-lg border border-gray-700">
-                <form class="space-y-8">
+                <form id="contactForm" class="space-y-8">
                     <div>
                         <input type="text" placeholder="Your Name" class="w-full px-6 py-4 bg-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-gray-200 placeholder-gray-500 text-lg">
                     </div>
