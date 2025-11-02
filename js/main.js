@@ -161,11 +161,13 @@ function initScrollAnimations() {
 // ============================================
 // Skill Circle Animation
 // ============================================
+const DEFAULT_SKILL_PERCENTAGE = 90;
+
 function animateSkillCircle(circleElement) {
     const progressCircle = circleElement.querySelector('.progress-circle');
     if (!progressCircle) return;
     
-    const percentage = circleElement.dataset.percentage || 90;
+    const percentage = circleElement.dataset.percentage || DEFAULT_SKILL_PERCENTAGE;
     const radius = progressCircle.r.baseVal.value;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (percentage / 100) * circumference;
@@ -177,10 +179,12 @@ function animateSkillCircle(circleElement) {
 // ============================================
 // Counter Animation
 // ============================================
+const COUNTER_DURATION_MS = 2000;
+const FRAME_DURATION_MS = 16; // ~60fps
+
 function animateCounter(counterElement) {
     const target = parseInt(counterElement.dataset.target) || 100;
-    const duration = 2000;
-    const increment = target / (duration / 16);
+    const increment = target / (COUNTER_DURATION_MS / FRAME_DURATION_MS);
     let current = 0;
     
     const updateCounter = () => {
@@ -314,7 +318,9 @@ function validateInput(input) {
 }
 
 function showSuccessAnimation() {
-    // This will be triggered by the SweetAlert in the existing code
+    // Success animation is handled by SweetAlert2 in the Supabase form submission code
+    // This function can be extended for additional custom animations if needed
+    console.log('Form submitted successfully');
 }
 
 // ============================================
@@ -432,23 +438,34 @@ function initAnimations() {
 // ============================================
 // Three.js 3D Scene
 // ============================================
+const PARTICLES_COUNT = 500;
+const PARTICLES_COUNT_MOBILE = 200;
+
 function initThreeJsScene() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
     
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    // Check if THREE.js is available
+    if (typeof THREE === 'undefined') {
+        console.warn('THREE.js library not loaded. 3D scene will not be initialized.');
+        return;
+    }
     
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    camera.position.z = 5;
-    
-    // Create particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 500;
-    const posArray = new Float32Array(particlesCount * 3);
+    try {
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        camera.position.z = 5;
+        
+        // Create particles - reduce count for mobile devices
+        const particlesGeometry = new THREE.BufferGeometry();
+        const isMobile = window.innerWidth < 768;
+        const particlesCount = isMobile ? PARTICLES_COUNT_MOBILE : PARTICLES_COUNT;
+        const posArray = new Float32Array(particlesCount * 3);
     
     for (let i = 0; i < particlesCount * 3; i++) {
         posArray[i] = (Math.random() - 0.5) * 10;
@@ -509,12 +526,15 @@ function initThreeJsScene() {
     
     animate();
     
-    // Handle resize
-    window.addEventListener('resize', () => {
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    });
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        });
+    } catch (error) {
+        console.error('Error initializing Three.js scene:', error);
+    }
 }
 
 // ============================================

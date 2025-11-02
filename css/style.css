@@ -8,7 +8,8 @@
     --text-dark: #9ca3af;
 }
 
-* {
+/* CSS Reset - More specific than universal selector for better performance */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ul, li, form, input, textarea, button, nav, section, article, aside, header, footer {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
